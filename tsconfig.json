@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "baseUrl": "src",
+    "paths": {
+      "@controllers/": ["controllers/"],
+      "@routes/": ["routes/"]
+    }
+  },
+  "ts-node": {
+    "esm": true
+  },
+}
