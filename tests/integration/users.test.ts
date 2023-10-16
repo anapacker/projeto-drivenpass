@@ -1,7 +1,6 @@
 import app from "app";
 import httpStatus from "http-status";
 import supertest from "supertest";
-import { faker } from '@faker-js/faker'
 import { createUser } from "./factory/users-factory";
 
 const server = supertest(app)

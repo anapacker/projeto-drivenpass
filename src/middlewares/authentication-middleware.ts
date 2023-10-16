@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { userRepository } from "../repository/user-repository";
 
 export async function authenticateToken(req: Request, res:Response, next:NextFunction) {
-  const auth = req.headers.authorization
+  const auth = req.header('Authorization')
   const token = auth?.replace('Bearer ', "")
   if(!token){
     throw UnauthorizedError()
@@ -13,6 +13,10 @@ export async function authenticateToken(req: Request, res:Response, next:NextFun
 
   if(jwt.verify(token, jwtKey)){
     res.locals.userData = jwt.decode(token)
+
+    res.locals.token = token;
+  }else{
+    throw UnauthorizedError()
   }
 
   const session = await userRepository.getSessionByUserId(res.locals.userData.data.userId)

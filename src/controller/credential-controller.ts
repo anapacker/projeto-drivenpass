@@ -8,7 +8,7 @@ async function createCredential(req:Request, res: Response) {
   infos.userId = +res.locals.userData.data.userId
 
   await credentialServices.createCredential(infos)
-
+  const token = res.locals.userData;
   res.status(httpStatus.CREATED).send(infos)
 }
 
