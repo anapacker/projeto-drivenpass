@@ -9,6 +9,14 @@ async function userPost(req: Request, res:Response) {
   res.status(httpStatus.CREATED).send(user)
   
 }
+async function signin(req: Request, res:Response) {
+  const infos: createUserType = req.body
+  const tokenAndUserId = await userService.signinService(infos)
+
+  res.locals.token = tokenAndUserId.token
+  res.send(tokenAndUserId)
+}
 export const userController = {
-  userPost
+  userPost,
+  signin
 }

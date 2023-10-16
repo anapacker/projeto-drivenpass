@@ -1,7 +1,7 @@
-import { UnauthorizedError } from "errors/unauthorized-error";
+import { UnauthorizedError } from "../errors/unauthorized-error";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { authRepository } from "repository/authenticate-repository";
+import { userRepository } from "../repository/user-repository";
 
 export async function authenticateToken(req: Request, res:Response, next:NextFunction) {
   const auth = req.headers.authorization
@@ -15,9 +15,9 @@ export async function authenticateToken(req: Request, res:Response, next:NextFun
     res.locals.userData = jwt.decode(token)
   }
 
-  const credential = await authRepository.getCredentialByUserId(res.locals.userData.data.userId)
+  const session = await userRepository.getSessionByUserId(res.locals.userData.data.userId)
 
-  if(!credential){
+  if(!session){
     throw UnauthorizedError()
   }
   next()

@@ -6,6 +6,7 @@ import { validateSchema } from '../middlewares/validate-schema';
 
 const usersRouter = Router();
 
-usersRouter.post('/users', validateSchema(createUserSchema), userController.userPost );
+usersRouter.post('/signup', validateSchema(createUserSchema), userController.userPost );
+usersRouter.post('/signin', validateSchema(createUserSchema), userController.signin);
 
 export { usersRouter };

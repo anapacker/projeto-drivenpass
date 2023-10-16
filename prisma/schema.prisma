@@ -32,3 +32,9 @@ model Credential {
 
   @@map("credentials")
 }
+model Session {
+  id      Int @id @default(autoincrement())
+  userId  Int
+
+  @@map("session")
+}
